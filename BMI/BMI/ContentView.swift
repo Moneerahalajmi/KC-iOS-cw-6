@@ -19,20 +19,21 @@ struct ContentView: View {
                 .ignoresSafeArea()
             VStack{
                Text("Calculate Your BMI")
+                    .font(.system(size: 30, weight: .medium, design: .rounded))
+                    
                 Image("scale")
                     .resizable()
                     .scaledToFit()
-                    
-            Text("Enter Height and Weight")
-                TextField("Weight", text: $Height)
-                TextField("Height", text: $Weight)
+                    .frame(width: 350, height: 400)
+                TextField("Weight", text: $Weight)
+                TextField("Height", text: $Height)
             
                 Button {
-                    Result = BmiCal(w: Double(Weight) ?? 0, h: Double(Height)??, 0)
+                    Result = BmiCal(w: Double(Weight) ?? 0, h: Double(Height) ?? 0)
                     if Result <= 20{
                        status = "Weak"
                     }
-                    else if  Result <=25 {
+                    else if  Result <= 25 {
                         status = "Good"
                     } else {
                         status = "Overweight"
@@ -40,20 +41,23 @@ struct ContentView: View {
                 } label: {
                     Text("Calculate the BMI")
                 }
+                .font(.system(size: 27, weight: .semibold, design: .rounded))
                 .padding()
-                .background(.yellow.opacity(0.6))
+                .background(.yellow.opacity(0.45))
                     .cornerRadius(40)
                     .foregroundColor(.black)
+                    
            Text("BMI= \(Result)")
+                    .font(.system(size: 25, weight: .ultraLight, design: .rounded))
             Text("Status = \(status)")
+                    .font(.system(size: 25, weight: .ultraLight, design: .rounded))
                 
-    func BmiCal (w: Double, h: Double)->
-    Double {
-      return w / (h * h)
     }
     }
     
         }
+    func BmiCal (w: Double, h: Double)->Double{
+        return w / (h*h)
     }
 }
 struct ContentView_Previews: PreviewProvider {
